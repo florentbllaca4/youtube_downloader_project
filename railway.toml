@@ -1,1 +1,8 @@
+[build]
+  frontend = "npm run build"
+  backend = "python3 app.py"
+
+[deploy]
+  command = "npm start"
+  port = "5000"
 
