@@ -1,8 +1,11 @@
 from flask import Flask, jsonify, request, send_file
+from flask_cors import CORS  # Importo Flask-CORS
 from yt_dlp import YoutubeDL
 import os
 
 app = Flask(__name__)
+CORS(app)  # Aktivizo CORS për të gjitha rruget
+
 DOWNLOAD_DIR = 'downloads'
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
@@ -47,4 +50,3 @@ def download():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
-
