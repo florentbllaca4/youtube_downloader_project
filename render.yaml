@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: youtube-backend
+    env: python
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "python3 backend/app.py"
+    regions:
+      - oregon
