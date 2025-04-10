@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const api = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 const App = () => {
   const [url, setUrl] = useState('');
   const [format, setFormat] = useState('mp4');
@@ -8,14 +10,14 @@ const App = () => {
 
   const handleDownload = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/download', {
+      const response = await axios.post(`${api}/download`, {
         url,
         format
       }, { responseType: 'blob' });
 
       const blob = new Blob([response.data], { type: 'application/octet-stream' });
-      const url = window.URL.createObjectURL(blob);
-      setDownloadLink(url);
+      const downloadUrl = window.URL.createObjectURL(blob);
+      setDownloadLink(downloadUrl);
     } catch (error) {
       alert('Ka ndodhur një gabim gjatë shkarkimit.');
     }
