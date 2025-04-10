@@ -1,17 +1,13 @@
-# Përdorim një imazh të Python-it
+# Përdorim një imazh bazë për Python
 FROM python:3.9-slim
 
-# Vendosim folderin e punës
+# Krijojmë një folder për aplikacionin
 WORKDIR /app
 
-# Kopjojmë skedarët në container
-COPY requirements.txt .
+# Kopjojmë skedarët e kërkuar në konteiner
+COPY requirements.txt /app/
 
-# Instalojmë varësitë
-RUN pip install -r requirements.txt
+# Instalojmë varësitë e nevojshme
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Kopjojmë kodin
-COPY . .
-
-# Startimi i aplikacionit
-CMD ["gunicorn", "app:app"]
+#
