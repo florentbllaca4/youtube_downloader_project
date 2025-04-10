@@ -1,8 +1,12 @@
-[build]
-  frontend = "npm run build"
-  backend = "python3 app.py"
+# Definoni backend-in dhe frontend-in
 
-[deploy]
-  command = "npm start"
-  port = "5000"
+[builds]
+  [[builds.backend]]
+    type = "python"
+    path = "backend"    # Vendosni këtu folderin backend
+    start = "python app.py"
 
+  [[builds.frontend]]
+    type = "nodejs"
+    path = "frontend"   # Vendosni këtu folderin frontend
+    start = "npm start"
