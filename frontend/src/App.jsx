@@ -7,8 +7,14 @@ const App = () => {
   const [url, setUrl] = useState('');
   const [format, setFormat] = useState('mp4');
   const [downloadLink, setDownloadLink] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleDownload = async () => {
+    setLoading(true);
+    setErrorMsg('');
+    setDownloadLink('');
+
     try {
       const response = await axios.post(`${api}/download`, {
         url,
@@ -19,28 +25,63 @@ const App = () => {
       const downloadUrl = window.URL.createObjectURL(blob);
       setDownloadLink(downloadUrl);
     } catch (error) {
-      alert('Ka ndodhur një gabim gjatë shkarkimit.');
+      console.error(error);
+      setErrorMsg('❌ Ka ndodhur një gabim gjatë shkarkimit. Kontrollo linkun ose provo sërish.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h1>Shkarkues YouTube</h1>
+    <div style={{ maxWidth: 500, margin: 'auto', textAlign: 'center', padding: 20 }}>
+      <h1>📥 Shkarkues YouTube</h1>
       <input
         type="text"
-        placeholder="Vendos URL-në"
+        placeholder="Vendos URL-në e videos..."
         value={url}
         onChange={(e) => setUrl(e.target.value)}
+        style={{ width: '100%', padding: '10px', marginBottom: '10px' }}
       />
-      <select onChange={(e) => setFormat(e.target.value)}>
+      <select
+        value={format}
+        onChange={(e) => setFormat(e.target.value)}
+        style={{ width: '100%', padding: '10px', marginBottom: '10px' }}
+      >
         <option value="mp4">MP4</option>
         <option value="mp4 (h264)">MP4 (H264)</option>
         <option value="mp3">MP3</option>
       </select>
-      <button onClick={handleDownload}>Shkarko</button>
+      <button
+        onClick={handleDownload}
+        disabled={loading || !url}
+        style={{
+          width: '100%',
+          padding: '10px',
+          backgroundColor: loading ? '#ccc' : '#007BFF',
+          color: 'white',
+          border: 'none',
+          cursor: loading ? 'not-allowed' : 'pointer'
+        }}
+      >
+        {loading ? 'Duke shkarkuar...' : 'Shkarko'}
+      </button>
+
+      {errorMsg && (
+        <p style={{ color: 'red', marginTop: '10px' }}>{errorMsg}</p>
+      )}
+
       {downloadLink && (
-        <a href={downloadLink} download>
-          Kliko këtu për të shkarkuar
+        <a
+          href={downloadLink}
+          download
+          style={{
+            display: 'block',
+            marginTop: '15px',
+            color: '#28a745',
+            fontWeight: 'bold'
+          }}
+        >
+          ✅ Kliko këtu për të shkarkuar
         </a>
       )}
     </div>
