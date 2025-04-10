@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App'; // Importoni komponentin kryesor të aplikacionit tuaj
-import './index.css'; // Opsionale: mund të shtoni stilizime nëse është e nevojshme
+//import './index.css'; // Opsionale: mund të shtoni stilizime nëse është e nevojshme
 
 // Ky është vendi ku React do të "renderojë" aplikacionin tuaj dhe do ta lidhi me div-in me id 'root' në index.html
 ReactDOM.render(
