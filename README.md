@@ -16,11 +16,5 @@ Ky është një projekt për shkarkimin e videove nga YouTube, që mbështet for
 - **Shkarkimi i Videove**: youtube-dl (përmes `yt-dlp`)
 - **Stilimi i Frontend**: CSS
 
-## Instalimi dhe Përdorimi
 
-### 1. Klono Repo-n
-
-```bash
-git clone https://github.com/your-username/youtube-downloader.git
-cd youtube-downloader
 
