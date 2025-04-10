@@ -1,12 +1,10 @@
-# Definoni backend-in dhe frontend-in
-
 [builds]
   [[builds.backend]]
     type = "python"
-    path = "backend"    # Vendosni këtu folderin backend
-    start = "python app.py"
+    path = "backend"
+    start = "gunicorn app:app"
 
   [[builds.frontend]]
     type = "nodejs"
-    path = "frontend"   # Vendosni këtu folderin frontend
+    path = "frontend"
     start = "npm start"
