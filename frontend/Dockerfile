@@ -1,20 +1,24 @@
-# Përdorim një imazh të Node.js
-FROM node:14
+# Përdorim një imazh bazë për Node.js
+FROM node:16
 
-# Vendosim folderin e punës
+# Krijojmë një folder për aplikacionin
 WORKDIR /app
 
-# Kopjojmë skedarët e paketës
-COPY package.json .
+# Kopjojmë skedarët e kërkuar në konteiner
+COPY package.json /app/
+COPY package-lock.json /app/
 
-# Instalojmë varësitë
+# Instalojmë varësitë e nevojshme
 RUN npm install
 
-# Kopjojmë kodin
-COPY . .
+# Kopjojmë gjithë skedarët e aplikacionit në konteiner
+COPY . /app/
 
-# Build-i i aplikacionit
+# Ndërtojmë aplikacionin për prodhim
 RUN npm run build
 
-# Startimi i aplikacionit
+# Ekspozimi i portit që React përdor
+EXPOSE 3000
+
+# Komanda për të startuar aplikacionin React
 CMD ["npm", "start"]
